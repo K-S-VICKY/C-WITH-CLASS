@@ -1,28 +1,21 @@
-#include <iostream>
+#include<iostream>
 using namespace std;
-class Circle {
-  public:
-    double getRadius()
-    {
-        return radius;
-    }
-    double getArea() 
-    {
-        return 3.14 * radius * radius;
-    }
-     void setRadius(double r)
-     {
-        radius = r;
-    }
-  private:
-    double radius;
+class AREA
+{
+    private:
+        double radius;
+    public:
+        void area(double r)
+        {
+            double area;
+            radius = r;
+            area = 3.14*radius*radius;
+            cout << "Radius is:" << radius << endl;
+            cout << "Area is:" << area;
+        }
 };
-int main() {
-  Circle myCircle;
-  double r;
-  cout << "Enter the radius of the circle: ";
-  cin >> r;
-  myCircle.setRadius(r);
-  cout << "The area of the circle is: " << myCircle.getArea() << endl;
-  return 0;
+int main()
+{
+    AREA obj;
+    obj.area(5);
 }
