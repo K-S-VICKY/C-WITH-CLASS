@@ -13,7 +13,7 @@ int main(){
         std::cout << "The area of the circle is:" << n2 << " meter square " << std::endl;
         return 0;
     }
-    else{
+    else if ( rd == 'D' || rd == 'd'){
         std::cout << "Enter the diameter of the circle:";
         std::cin >> n1;
         n1=n1/2;
