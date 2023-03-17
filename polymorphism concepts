@@ -1,0 +1,96 @@
+#include <iostream>
+#include <cmath>
+class Shape {
+public:
+    virtual ~Shape() {} 
+    virtual double calarea() const = 0;
+};
+
+class TwoDShape : public Shape {
+public:
+    virtual ~TwoDShape() {}
+};
+
+class ThreeDShape : public Shape {
+public:
+    virtual ~ThreeDShape() {}
+    virtual double calvolume() const = 0;
+};
+
+class Circle : public TwoDShape {
+public:
+    Circle(double radius) : radius_(radius) {}
+    double calarea() const override {
+        return M_PI * radius_ * radius_;
+    }
+private:
+    double radius_;
+};
+
+class Triangle : public TwoDShape {
+public:
+    Triangle(double base, double height) : base_(base), height_(height) {}
+    double calarea() const override {
+        return 0.5 * base_ * height_;
+    }
+private:
+    double base_;
+    double height_;
+};
+
+class Square : public TwoDShape {
+public:
+    Square(double side) : side_(side) {}
+    double calarea() const override {
+        return side_ * side_;
+    }
+private:
+    double side_;
+};
+
+class Cube : public ThreeDShape {
+public:
+    Cube(double side) : side_(side) {}
+    double calarea() const override {
+        return 6 * side_ * side_;
+    }
+    double calvolume() const override {
+        return side_ * side_ * side_;
+    }
+private:
+    double side_;
+};
+
+class Sphere : public ThreeDShape {
+public:
+    Sphere(double radius) : radius_(radius) {}
+    double calarea() const override {
+        return 4 * M_PI * radius_ * radius_;
+    }
+    double calvolume() const override {
+        return 4.0/3.0 * M_PI * radius_ * radius_ * radius_;
+    }
+private:
+    double radius_;
+};
+
+int main() {
+    
+    Circle circle(2.0);
+    Triangle triangle(3.0, 4.0);
+    Square square(2.0);
+    Cube cube(2.0);
+    Sphere sphere(2.0);
+
+ 
+    Shape* shapes[] = {&circle, &triangle, &square, &cube, &sphere};
+    for (auto shape : shapes) {
+        std::cout << "Area = " << shape->calarea();
+        auto three_d_shape = dynamic_cast<ThreeDShape*>(shape); 
+        if (three_d_shape) {
+            std::cout << ", Volume = " << three_d_shape->calvolume();
+        }
+        std::cout << std::endl;
+    }
+    return 0;
+}
